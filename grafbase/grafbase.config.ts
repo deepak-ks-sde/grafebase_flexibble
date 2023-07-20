@@ -32,6 +32,14 @@ const jwt = auth.JWT({
   secret:  g.env('NEXTAUTH_SECRET')
 })
 
+// @ts-ignore
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+}
+
 export default config({
   schema: g,
   auth: {
